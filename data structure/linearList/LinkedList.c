@@ -92,11 +92,13 @@ int main(){
         insertList(&head, i, i*100);
     deleteList(&head, 5);
     Node node = &head;
+    //正向遍历
     do {
         node = node->next;
         printf("%d->",node->element);
     } while (node->next != NULL);
     printf("\n");
+    //反向遍历
     do {
         printf("%d->", node->element);
         node = node->prev;
