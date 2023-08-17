@@ -57,7 +57,31 @@ _Bool insertList(Node head, int index, E element){
     return 1;
 }
 
-_Bool deleteList(){
+//删除操作
+_Bool deleteList(Node head, int index){
+    //起始范围判断
+    if (index < 1)  return 0;
+    //寻找待删除节点的前驱节点
+    while (--index){
+        //遍历
+        head = head->next;
+        //终止范围判断
+        if (head == NULL)   return 0;
+    }
+    if (head->next == NULL) return 0;
+    //保存待删除结点,以便删除
+    Node temp = head->next;
+    //修改后继
+    if (head->next->next){  //待删除结点有后继节点
+        //修改待删除节点的后继节点的前驱节点指向
+        head->next->next->prev = head;
+        //修改待删除结点的前驱节点的后继节点指向
+        head->next = head->next->next;
+    } else{ //待删除结点无后继节点
+        head->next = NULL;
+    }
+    //释放待删除节点的内存空间
+    free(temp);
     return 1;
 }
 
@@ -66,6 +90,7 @@ int main(){
     initList(&head);
     for (int i = 1; i <= 5; i++)
         insertList(&head, i, i*100);
+    deleteList(&head, 5);
     Node node = &head;
     do {
         node = node->next;
