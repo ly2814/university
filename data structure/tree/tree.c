@@ -16,21 +16,17 @@ typedef struct TreeNode{
 
 //将栈内元素类型设置为树的结点
 typedef Node T;   //这里栈内元素类型定义为上面的Node，也就是二叉树结点指针
-
 //栈的数据结构
 struct StackNode {
     T element;
     struct StackNode * next;
 };
-
 //设置别名
 typedef struct StackNode * SNode;  //这里就命名为SNode，不然跟上面冲突了就不好了
-
 //初始化栈
 void initStack(SNode head){
     head->next = NULL;
 }
-
 //入栈
 _Bool pushStack(SNode head, T element){
     SNode node = malloc(sizeof(struct StackNode));
@@ -40,12 +36,10 @@ _Bool pushStack(SNode head, T element){
     head->next = node;
     return 1;
 }
-
 //栈是否为空
 _Bool isEmpty(SNode head){
     return head->next == NULL;
 }
-
 //出栈
 T popStack(SNode head){
     SNode top = head->next;
@@ -59,6 +53,44 @@ T peekStack(SNode head){
     return head->next->element;
 }
 
+//队列结点
+typedef struct QueueNode{
+    T element;
+    struct QueueNode * next;
+} * QNode;
+typedef struct Queue{
+    QNode front, rear;
+} * LinkedQueue;
+//初始化
+_Bool initQueue(LinkedQueue queue){
+    QNode node = malloc(sizeof (struct QueueNode));
+    if (node == NULL)   return 0;
+    queue->front = queue->rear = node;
+    return 1;
+}
+//入队
+_Bool offerQueue(LinkedQueue queue, T element){
+    QNode node = malloc(sizeof (struct QueueNode));
+    if (node == NULL)   return 0;
+    node->element = element;
+    queue->rear->next = node;
+    queue->rear = node;
+    return 1;
+}
+//队列判空
+_Bool isEmptyQueue(LinkedQueue queue){
+    return  queue->front == queue->rear;
+}
+//出队
+T pollQueue(LinkedQueue queue){
+    T element = queue->front->next->element;
+    QNode temp = queue->front->next;
+    queue->front->next = queue->front->next->next;
+    if (queue->rear == temp) queue->rear = queue->front;
+    free(temp);
+    return element;
+}
+
 //前序遍历:递归
 void pre(Node root){
     //空结点返回
@@ -70,7 +102,7 @@ void pre(Node root){
     //右侧子树递归
     pre(root->right);
 }
-//谦虚遍历非递归使用栈
+//前序遍历非递归使用栈
 void preByStack(Node root){
     struct StackNode head;
     initStack(&head);
@@ -101,7 +133,7 @@ void middle(Node root){
     //遍历右子树
     middle(root->right);
 }
-
+//中序遍历非递归使用栈
 void middleByStack(Node root){
     struct StackNode stack;
     initStack(&stack);
@@ -131,7 +163,7 @@ void post(Node root){
     //输出结点
     printf("%c ",root->element);
 }
-
+//后序遍历非递归使用栈
 void postByStack(Node root){
     //定义栈
     struct StackNode stack;
@@ -154,7 +186,7 @@ void postByStack(Node root){
         if (root->flag == 0){
             //设置该结点已经被右子树遍历
             root->flag = 1;
-            //迭代
+            //迭代(右子树)
             root = root->right;
         } else{ //该分支为左右子树都被遍历
             //输出元素
@@ -164,6 +196,30 @@ void postByStack(Node root){
             //根节点置空
             root = NULL;
         }
+    }
+}
+
+//层序遍历
+void levelByQueue(Node root){
+    //声明队列
+    struct Queue queue;
+    //初始化
+    initQueue(&queue);
+    //根节点入队
+    offerQueue(&queue, root);
+    while (!isEmptyQueue(&queue)){
+        //出队
+        Node node = pollQueue(&queue);
+        //输出
+        printf("%c ",node->element);
+        //有左子树
+        if (node->left)
+            //左子树入队
+            offerQueue(&queue,node->left);
+        //有右子树
+        if (node->right)
+            //右子树入队
+            offerQueue(&queue,node->right);
     }
 }
 
@@ -200,6 +256,7 @@ int main(){
 //    middle(a);
 //    middleByStack(a);
 //    post(a);
-    postByStack(a);
+//    postByStack(a);
+    levelByQueue(a);
     return 0;
 }
