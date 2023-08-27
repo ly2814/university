@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//Ê÷
+//æ ‘
 typedef char E;
 typedef struct TreeNode{
     E element;
@@ -28,7 +28,7 @@ void middle(Node root){
     middle(root->right);
 }
 
-//ÓÅÏÈ¼¶¶ÓÁĞ
+//ä¼˜å…ˆçº§é˜Ÿåˆ—
 typedef Node T;
 typedef struct QueueNode{
     T element;
@@ -102,7 +102,7 @@ char * encode(Node root,E e){
 }
 
 void printEncode(Node root, E e){
-    printf("%c µÄ±àÂëÎª: %s",e,encode(root,e));
+    printf("%c çš„ç¼–ç ä¸º: %s",e,encode(root,e));
     printf("\n");
 }
 

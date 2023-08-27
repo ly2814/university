@@ -7,65 +7,65 @@
 typedef int E;
 typedef struct LinkedNode * Node;
 
-//é“¾è¡¨èŠ‚ç‚¹
+//Á´±í½Úµã
 struct LinkedNode{
     E element;
     Node next;
 };
 
-//åˆå§‹åŒ–æ ˆ
+//³õÊ¼»¯Õ»
 void init(Node head){
-    //å¤´èŠ‚ç‚¹å¤–å…¶ä½™èŠ‚ç‚¹çš†æ— 
+    //Í·½ÚµãÍâÆäÓà½Úµã½ÔÎÞ
     head->next = NULL;
 }
 
-//å…¥æ ˆ
+//ÈëÕ»
 _Bool pushStack(Node head, E element){
-    //ä¸ºæ–°èŠ‚ç‚¹åˆ†é…ç©ºé—´
+    //ÎªÐÂ½Úµã·ÖÅä¿Õ¼ä
     Node node = malloc(sizeof (struct LinkedNode));
-    //åˆ¤æ–­æ˜¯å¦åˆ†é…æˆåŠŸ
+    //ÅÐ¶ÏÊÇ·ñ·ÖÅä³É¹¦
     if (node == NULL)   return 0;
-    //è£…å…ƒç´ 
+    //×°ÔªËØ
     node->element = element;
-    //ä¿®æ”¹åŽç»§
+    //ÐÞ¸Äºó¼Ì
     node->next = head->next;
-    //ä¿®æ”¹å‰é©±
+    //ÐÞ¸ÄÇ°Çý
     head->next = node;
     return 1;
 }
 
-//æ‰“å°æ ˆå†…å…ƒç´ 
+//´òÓ¡Õ»ÄÚÔªËØ
 void printStack(Node head){
     printf("| ");
-    //å¤´èŠ‚ç‚¹æ— å…ƒç´ ,æŒ‡å‘ä¸‹ä¸€ä¸ª
+    //Í·½ÚµãÎÞÔªËØ,Ö¸ÏòÏÂÒ»¸ö
     head = head->next;
     while (head != NULL){
-        //è¾“å‡ºå…ƒç´ 
+        //Êä³öÔªËØ
         printf("%d ", head->element);
-        //éåŽ†
+        //±éÀú
         head = head->next;
     }
     printf("\n");
 }
 
-//æ ˆæ˜¯å¦ä¸ºç©º
+//Õ»ÊÇ·ñÎª¿Õ
 _Bool isEmpty(Node node){
     return node->next == NULL;
 }
 
-//å‡ºæ ˆ
+//³öÕ»
 E popStack(Node head){
-    //åˆ¤ç©º,ç©ºæ ˆæ— æ³•å‡ºæ ˆ
+    //ÅÐ¿Õ,¿ÕÕ»ÎÞ·¨³öÕ»
     if (isEmpty(head)) return 0;
-    //ä¿å­˜è¦å‡ºæ ˆçš„èŠ‚ç‚¹,æ–¹ä¾¿é‡Šæ”¾ç©ºé—´
+    //±£´æÒª³öÕ»µÄ½Úµã,·½±ãÊÍ·Å¿Õ¼ä
     Node top = head->next;
-    //ä¿®æ”¹æŒ‡å‘
+    //ÐÞ¸ÄÖ¸Ïò
     head->next = head->next->next;
-    //æå–å…ƒç´ 
+    //ÌáÈ¡ÔªËØ
     E element = top->element;
-    //é‡Šæ”¾ç©ºé—´
+    //ÊÍ·Å¿Õ¼ä
     free(top);
-    //è¿”å›žå…ƒç´ 
+    //·µ»ØÔªËØ
     return element;
 }
 

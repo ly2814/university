@@ -10,18 +10,18 @@ typedef int E;
 typedef struct List * ArrayList;
 
 struct List{
-    //æ•°ç»„
+    //Êı×é
     E * array;
-    //æ•°ç»„é•¿åº¦
+    //Êı×é³¤¶È
     int capacity;
-    //listé•¿åº¦
+    //list³¤¶È
     int size;
 };
 
 int initList(ArrayList list){
-    //ç”³è¯·å†…å­˜ç©ºé—´
+    //ÉêÇëÄÚ´æ¿Õ¼ä
     list->array = malloc(sizeof (E) * list->capacity);
-    //æ— æ³•ç”³è¯·è¿”å›0,åŒæ—¶ç»“æ„ä½“å†…éƒ¨å±æ€§ä¸ä¼šå‘ç”Ÿæ”¹å˜
+    //ÎŞ·¨ÉêÇë·µ»Ø0,Í¬Ê±½á¹¹ÌåÄÚ²¿ÊôĞÔ²»»á·¢Éú¸Ä±ä
     if(list->array == NULL) return 0;
     list->capacity = 10;
     list->size = 0;
@@ -29,12 +29,12 @@ int initList(ArrayList list){
 }
 
 _Bool insertList(ArrayList list, E element, int index){
-    //æ—¶é—´å¤æ‚åº¦O(n)
+    //Ê±¼ä¸´ÔÓ¶ÈO(n)
     if(index < 1 || index > list->size + 1) return 0;
 
     if(list->size == list->capacity){
         int newCapacity = list->capacity + (list->capacity >> 1);
-        //æ•°ç»„æ‰©å®¹
+        //Êı×éÀ©Èİ
         E * newArray = realloc(list->array,newCapacity * sizeof(E));
         if(newArray == NULL)    return 0;
         list->array = newArray;
@@ -43,14 +43,14 @@ _Bool insertList(ArrayList list, E element, int index){
 
     for (int i = list->size; i > index - 1; i--)
         list->array[i] = list->array[i-1];
-    //æ•°ç»„ä¸‹æ ‡ä»0å¼€å§‹
+    //Êı×éÏÂ±ê´Ó0¿ªÊ¼
     list->array[index - 1] = element;
     list->size++;
     return 1;
 }
 
 _Bool deleteList(ArrayList list, int index){
-    //åˆ é™¤æ—¶é—´å¤æ‚åº¦O(n)
+    //É¾³ıÊ±¼ä¸´ÔÓ¶ÈO(n)
     if(index < 1 || index > list->size) return 0;
     for (int i = index - 1; i < list->size -1; i++) {
         list->array[i] = list->array[i+1];
@@ -70,7 +70,7 @@ int sizeList(ArrayList list){
 }
 
 E * getElement(ArrayList list, int index){
-    //æ—¶é—´å¤æ‚åº¦O(1)
+    //Ê±¼ä¸´ÔÓ¶ÈO(1)
     if(index < 1 || index > list->size) return NULL;
     return &(list->array[index-1]);
 }
@@ -89,7 +89,7 @@ void push(ArrayList list, E element){
 
 
 void unionList(ArrayList list1, ArrayList list2, ArrayList list3){
-    //ArrayListæ˜¯ç»“æ„ä½“ListæŒ‡é’ˆçš„è‡ªå®šä¹‰ç±»å‹
+    //ArrayListÊÇ½á¹¹ÌåListÖ¸ÕëµÄ×Ô¶¨ÒåÀàĞÍ
     int i = 0, j = 0, k = 0;
     while (i < list1->size && j < list2->size)
         if(list1->array[i] <= list2->array[j])

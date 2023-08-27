@@ -1,6 +1,6 @@
 //
 // Created by 34043 on 2023/8/17.
-// ç”¨æ•°ç»„å®ç°æ ˆ
+// ÓÃÊı×éÊµÏÖÕ»
 //
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,50 +9,50 @@ typedef int E;
 typedef struct Stack * ArrayStack;
 
 struct Stack{
-    //å­˜æ”¾æ ˆå†…å…ƒç´ çš„æ•°ç»„
+    //´æ·ÅÕ»ÄÚÔªËØµÄÊı×é
     E * array;
-    //æ ˆçš„å®¹é‡
+    //Õ»µÄÈİÁ¿
     int capacity;
-    //å½“å‰æ ˆé¡¶å…ƒç´ ä¸‹æ ‡
+    //µ±Ç°Õ»¶¥ÔªËØÏÂ±ê
     int top;
 };
 
-//åˆå§‹åŒ–
+//³õÊ¼»¯
 _Bool init(ArrayStack stack){
-    //åˆ†é…ç©ºé—´
+    //·ÖÅä¿Õ¼ä
     stack->array = malloc(sizeof (E) * 10);
-    //åˆ¤æ–­å†…å­˜ç©ºé—´æ˜¯å¦å¼€è¾ŸæˆåŠŸ
+    //ÅĞ¶ÏÄÚ´æ¿Õ¼äÊÇ·ñ¿ª±Ù³É¹¦
     if (stack->array == NULL)   return  0;
-    //åˆå§‹åŒ–æ ˆçš„å®¹é‡
+    //³õÊ¼»¯Õ»µÄÈİÁ¿
     stack->capacity = 10;
-    //åˆå§‹åŒ–æ—¶æ ˆå†…æ— å…ƒç´ ,æ•…æ ˆé¡¶å…ƒç´ ä¸‹æ ‡ä¸º-1
+    //³õÊ¼»¯Ê±Õ»ÄÚÎŞÔªËØ,¹ÊÕ»¶¥ÔªËØÏÂ±êÎª-1
     stack->top = -1;
     return 1;
 }
 
-//å…¥æ ˆ
+//ÈëÕ»
 _Bool pushStack(ArrayStack stack, E element){
-    //åˆ¤æ–­æ ˆæ˜¯å¦å·²æ»¡
+    //ÅĞ¶ÏÕ»ÊÇ·ñÒÑÂú
     if(stack->top + 1 == stack->capacity){
-        //è®¡ç®—æ–°å®¹é‡
+        //¼ÆËãĞÂÈİÁ¿
         int newCapacity = stack->capacity + (stack->capacity >> 1);
-        //ä¸ºæ–°æ•°ç»„åˆ†é…å†…å­˜ç©ºé—´
+        //ÎªĞÂÊı×é·ÖÅäÄÚ´æ¿Õ¼ä
         E newArray = realloc(stack->array, newCapacity * sizeof (E));
-        //æ£€æŸ¥æ˜¯å¦åˆ†é…æˆåŠŸ
+        //¼ì²éÊÇ·ñ·ÖÅä³É¹¦
         if (stack->array == NULL)   return 0;
-        //ä¿®æ”¹æ ˆå…ƒç´ ç©ºé—´æŒ‡å‘
+        //ĞŞ¸ÄÕ»ÔªËØ¿Õ¼äÖ¸Ïò
         stack->array = newArray;
-        //æ›´æ–°æ ˆå®¹é‡
+        //¸üĞÂÕ»ÈİÁ¿
         stack->capacity = newCapacity;
     }
-    //å…¥æ ˆ
+    //ÈëÕ»
     stack->array[stack->top + 1] = element;
-    //æ ˆé¡¶ä½ç½®æ›´æ–°
+    //Õ»¶¥Î»ÖÃ¸üĞÂ
     stack->top++;
     return 1;
 }
 
-//æ‰“å°æ ˆå†…å…ƒç´ 
+//´òÓ¡Õ»ÄÚÔªËØ
 void printStack(ArrayStack stack){
     for (int i = 0; i < stack->top + 1; ++i) {
         printf("%d ", stack->array[i]);
@@ -60,16 +60,16 @@ void printStack(ArrayStack stack){
     printf("\n");
 }
 
-//åˆ¤æ–­æ˜¯å¦ä¸ºç©ºæ ˆ
+//ÅĞ¶ÏÊÇ·ñÎª¿ÕÕ»
 _Bool isEmpty(ArrayStack stack){
     return stack->top == -1;
 }
 
-//å‡ºæ ˆ
+//³öÕ»
 E popStack(ArrayStack stack){
-    //åˆ¤ç©º,ç©ºæ ˆæ— æ³•å‡ºæ ˆ
+    //ÅĞ¿Õ,¿ÕÕ»ÎŞ·¨³öÕ»
     if (isEmpty(stack)) return 0;
-    //å‡ºæ ˆåè‡ªå‡
+    //³öÕ»ºó×Ô¼õ
     return stack->array[stack->top--];
 }
 

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 typedef char E;
 
-//æ ‘çš„æ•°æ®ç»“æž„
+//Ê÷µÄÊý¾Ý½á¹¹
 typedef struct TreeNode{
     E element;
     struct TreeNode * left;
@@ -14,20 +14,20 @@ typedef struct TreeNode{
     int flag;
 } *  Node;
 
-//å°†æ ˆå†…å…ƒç´ ç±»åž‹è®¾ç½®ä¸ºæ ‘çš„ç»“ç‚¹
-typedef Node T;   //è¿™é‡Œæ ˆå†…å…ƒç´ ç±»åž‹å®šä¹‰ä¸ºä¸Šé¢çš„Nodeï¼Œä¹Ÿå°±æ˜¯äºŒå‰æ ‘ç»“ç‚¹æŒ‡é’ˆ
-//æ ˆçš„æ•°æ®ç»“æž„
+//½«Õ»ÄÚÔªËØÀàÐÍÉèÖÃÎªÊ÷µÄ½áµã
+typedef Node T;   //ÕâÀïÕ»ÄÚÔªËØÀàÐÍ¶¨ÒåÎªÉÏÃæµÄNode£¬Ò²¾ÍÊÇ¶þ²æÊ÷½áµãÖ¸Õë
+//Õ»µÄÊý¾Ý½á¹¹
 struct StackNode {
     T element;
     struct StackNode * next;
 };
-//è®¾ç½®åˆ«å
-typedef struct StackNode * SNode;  //è¿™é‡Œå°±å‘½åä¸ºSNodeï¼Œä¸ç„¶è·Ÿä¸Šé¢å†²çªäº†å°±ä¸å¥½äº†
-//åˆå§‹åŒ–æ ˆ
+//ÉèÖÃ±ðÃû
+typedef struct StackNode * SNode;  //ÕâÀï¾ÍÃüÃûÎªSNode£¬²»È»¸úÉÏÃæ³åÍ»ÁË¾Í²»ºÃÁË
+//³õÊ¼»¯Õ»
 void initStack(SNode head){
     head->next = NULL;
 }
-//å…¥æ ˆ
+//ÈëÕ»
 _Bool pushStack(SNode head, T element){
     SNode node = malloc(sizeof(struct StackNode));
     if(node == NULL) return 0;
@@ -36,11 +36,11 @@ _Bool pushStack(SNode head, T element){
     head->next = node;
     return 1;
 }
-//æ ˆæ˜¯å¦ä¸ºç©º
+//Õ»ÊÇ·ñÎª¿Õ
 _Bool isEmpty(SNode head){
     return head->next == NULL;
 }
-//å‡ºæ ˆ
+//³öÕ»
 T popStack(SNode head){
     SNode top = head->next;
     head->next = head->next->next;
@@ -48,12 +48,12 @@ T popStack(SNode head){
     free(top);
     return e;
 }
-//æ ˆé¡¶
+//Õ»¶¥
 T peekStack(SNode head){
     return head->next->element;
 }
 
-//é˜Ÿåˆ—ç»“ç‚¹
+//¶ÓÁÐ½áµã
 typedef struct QueueNode{
     T element;
     struct QueueNode * next;
@@ -61,14 +61,14 @@ typedef struct QueueNode{
 typedef struct Queue{
     QNode front, rear;
 } * LinkedQueue;
-//åˆå§‹åŒ–
+//³õÊ¼»¯
 _Bool initQueue(LinkedQueue queue){
     QNode node = malloc(sizeof (struct QueueNode));
     if (node == NULL)   return 0;
     queue->front = queue->rear = node;
     return 1;
 }
-//å…¥é˜Ÿ
+//Èë¶Ó
 _Bool offerQueue(LinkedQueue queue, T element){
     QNode node = malloc(sizeof (struct QueueNode));
     if (node == NULL)   return 0;
@@ -77,11 +77,11 @@ _Bool offerQueue(LinkedQueue queue, T element){
     queue->rear = node;
     return 1;
 }
-//é˜Ÿåˆ—åˆ¤ç©º
+//¶ÓÁÐÅÐ¿Õ
 _Bool isEmptyQueue(LinkedQueue queue){
     return  queue->front == queue->rear;
 }
-//å‡ºé˜Ÿ
+//³ö¶Ó
 T pollQueue(LinkedQueue queue){
     T element = queue->front->next->element;
     QNode temp = queue->front->next;
@@ -91,134 +91,134 @@ T pollQueue(LinkedQueue queue){
     return element;
 }
 
-//å‰åºéåŽ†:é€’å½’
+//Ç°Ðò±éÀú:µÝ¹é
 void pre(Node root){
-    //ç©ºç»“ç‚¹è¿”å›ž
+    //¿Õ½áµã·µ»Ø
     if (root == NULL)   return;
-    //æ‰“å°
+    //´òÓ¡
     printf("%c ",root->element);
-    //å·¦ä¾§å­æ ‘é€’å½’
+    //×ó²à×ÓÊ÷µÝ¹é
     pre(root->left);
-    //å³ä¾§å­æ ‘é€’å½’
+    //ÓÒ²à×ÓÊ÷µÝ¹é
     pre(root->right);
 }
-//å‰åºéåŽ†éžé€’å½’ä½¿ç”¨æ ˆ
+//Ç°Ðò±éÀú·ÇµÝ¹éÊ¹ÓÃÕ»
 void preByStack(Node root){
     struct StackNode head;
     initStack(&head);
     while (root || !isEmpty(&head)){
-        //éåŽ†å·¦å­æ ‘
+        //±éÀú×ó×ÓÊ÷
         while (root){
-            //æ‰“å°
+            //´òÓ¡
             printf("%c",root->element);
-            //å…¥æ ˆ
+            //ÈëÕ»
             pushStack(&head, root);
-            //å·¦å­æ ‘è¿­ä»£
+            //×ó×ÓÊ÷µü´ú
             root = root->left;
         }
-        //å‡ºæ ˆ
+        //³öÕ»
         Node node = popStack(&head);
-        //å³å­æ ‘ç»“ç‚¹å›žæº¯
+        //ÓÒ×ÓÊ÷½áµã»ØËÝ
         root = node->right;
     }
 }
 
-//ä¸­åºéåŽ†
+//ÖÐÐò±éÀú
 void middle(Node root){
     if (root==NULL) return;
-    //éåŽ†å·¦å­æ ‘
+    //±éÀú×ó×ÓÊ÷
     middle(root->left);
-    //è¾“å‡ºç»“ç‚¹
+    //Êä³ö½áµã
     printf("%c ",root->element);
-    //éåŽ†å³å­æ ‘
+    //±éÀúÓÒ×ÓÊ÷
     middle(root->right);
 }
-//ä¸­åºéåŽ†éžé€’å½’ä½¿ç”¨æ ˆ
+//ÖÐÐò±éÀú·ÇµÝ¹éÊ¹ÓÃÕ»
 void middleByStack(Node root){
     struct StackNode stack;
     initStack(&stack);
     while (root || !isEmpty(&stack)){
-        //å…ˆéåŽ†å·¦å­æ ‘
+        //ÏÈ±éÀú×ó×ÓÊ÷
         while (root){
             pushStack(&stack, root);
-            //å·¦å­æ ‘ç»“ç‚¹è¿­ä»£
+            //×ó×ÓÊ÷½áµãµü´ú
             root = root->left;
         }
-        //å‡ºæ ˆ
+        //³öÕ»
         Node node = popStack(&stack);
-        //è¾“å‡º
+        //Êä³ö
         printf("%c ", node->element);
-        //å³å­æ ‘ç»“ç‚¹å›žæº¯
+        //ÓÒ×ÓÊ÷½áµã»ØËÝ
         root = node->right;
     }
 }
 
-//åŽåºéåŽ†
+//ºóÐò±éÀú
 void post(Node root){
     if (root == NULL)   return;
-    //éåŽ†å·¦å­æ ‘
+    //±éÀú×ó×ÓÊ÷
     post(root->left);
-    //éåŽ†å³å­æ ‘
+    //±éÀúÓÒ×ÓÊ÷
     post(root->right);
-    //è¾“å‡ºç»“ç‚¹
+    //Êä³ö½áµã
     printf("%c ",root->element);
 }
-//åŽåºéåŽ†éžé€’å½’ä½¿ç”¨æ ˆ
+//ºóÐò±éÀú·ÇµÝ¹éÊ¹ÓÃÕ»
 void postByStack(Node root){
-    //å®šä¹‰æ ˆ
+    //¶¨ÒåÕ»
     struct StackNode stack;
-    //åˆå§‹åŒ–æ ˆ
+    //³õÊ¼»¯Õ»
     initStack(&stack);
-    //å¼€å§‹éåŽ†
+    //¿ªÊ¼±éÀú
     while (root || !isEmpty(&stack)){
-        //éåŽ†å·¦å­æ ‘
+        //±éÀú×ó×ÓÊ÷
         while (root){
-            //æ¯ä¸ªç»“ç‚¹å…¥æ ˆ
+            //Ã¿¸ö½áµãÈëÕ»
             pushStack(&stack,root);
-            //è®¾ç½®è¯¥ç»“ç‚¹å·²ç»è¢«å·¦å­æ ‘éåŽ†
+            //ÉèÖÃ¸Ã½áµãÒÑ¾­±»×ó×ÓÊ÷±éÀú
             root->flag = 0;
-            //è¿­ä»£
+            //µü´ú
             root = root->left;
         }
-        //å·¦å­æ ‘éåŽ†å®Œæˆ,æ­¤æ—¶rootä¸ºç©º,å°†æ ˆé¡¶å…ƒç´ æŒ‡å‘root
+        //×ó×ÓÊ÷±éÀúÍê³É,´ËÊ±rootÎª¿Õ,½«Õ»¶¥ÔªËØÖ¸Ïòroot
         root = peekStack(&stack);
-        //åˆ¤æ–­è¯¥èŠ‚ç‚¹æ˜¯å¦å‚ä¸Žå·¦å­æ ‘éåŽ†,å¦‚æžœå‚ä¸Žè¿‡å¼€å§‹å³å­æ ‘éåŽ†
+        //ÅÐ¶Ï¸Ã½ÚµãÊÇ·ñ²ÎÓë×ó×ÓÊ÷±éÀú,Èç¹û²ÎÓë¹ý¿ªÊ¼ÓÒ×ÓÊ÷±éÀú
         if (root->flag == 0){
-            //è®¾ç½®è¯¥ç»“ç‚¹å·²ç»è¢«å³å­æ ‘éåŽ†
+            //ÉèÖÃ¸Ã½áµãÒÑ¾­±»ÓÒ×ÓÊ÷±éÀú
             root->flag = 1;
-            //è¿­ä»£(å³å­æ ‘)
+            //µü´ú(ÓÒ×ÓÊ÷)
             root = root->right;
-        } else{ //è¯¥åˆ†æ”¯ä¸ºå·¦å³å­æ ‘éƒ½è¢«éåŽ†
-            //è¾“å‡ºå…ƒç´ 
+        } else{ //¸Ã·ÖÖ§Îª×óÓÒ×ÓÊ÷¶¼±»±éÀú
+            //Êä³öÔªËØ
             printf("%c ",root->element);
-            //å‡ºæ ˆ
+            //³öÕ»
             popStack(&stack);
-            //æ ¹èŠ‚ç‚¹ç½®ç©º
+            //¸ù½ÚµãÖÃ¿Õ
             root = NULL;
         }
     }
 }
 
-//å±‚åºéåŽ†
+//²ãÐò±éÀú
 void levelByQueue(Node root){
-    //å£°æ˜Žé˜Ÿåˆ—
+    //ÉùÃ÷¶ÓÁÐ
     struct Queue queue;
-    //åˆå§‹åŒ–
+    //³õÊ¼»¯
     initQueue(&queue);
-    //æ ¹èŠ‚ç‚¹å…¥é˜Ÿ
+    //¸ù½ÚµãÈë¶Ó
     offerQueue(&queue, root);
     while (!isEmptyQueue(&queue)){
-        //å‡ºé˜Ÿ
+        //³ö¶Ó
         Node node = pollQueue(&queue);
-        //è¾“å‡º
+        //Êä³ö
         printf("%c ",node->element);
-        //æœ‰å·¦å­æ ‘
+        //ÓÐ×ó×ÓÊ÷
         if (node->left)
-            //å·¦å­æ ‘å…¥é˜Ÿ
+            //×ó×ÓÊ÷Èë¶Ó
             offerQueue(&queue,node->left);
-        //æœ‰å³å­æ ‘
+        //ÓÐÓÒ×ÓÊ÷
         if (node->right)
-            //å³å­æ ‘å…¥é˜Ÿ
+            //ÓÒ×ÓÊ÷Èë¶Ó
             offerQueue(&queue,node->right);
     }
 }

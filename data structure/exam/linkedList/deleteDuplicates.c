@@ -6,9 +6,9 @@
 #include <stdbool.h>
 
 /**
- * åˆ é™¤é‡å¤å…ƒç´ 
- * ä½¿ç”¨çš„æ•°æ®ç»“æž„:å•é“¾è¡¨
- * è§£é¢˜æ€è·¯:æ‰¾åˆ°é‡å¤å…ƒç´ çš„å‰é©±ç»“ç‚¹,ä¿®æ”¹æŒ‡å‘,è¿”å›žå¤´ç»“ç‚¹
+ * É¾³ýÖØ¸´ÔªËØ
+ * Ê¹ÓÃµÄÊý¾Ý½á¹¹:µ¥Á´±í
+ * ½âÌâË¼Â·:ÕÒµ½ÖØ¸´ÔªËØµÄÇ°Çý½áµã,ÐÞ¸ÄÖ¸Ïò,·µ»ØÍ·½áµã
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -24,7 +24,7 @@ struct ListNode {
 struct ListNode* deleteDuplicates(struct ListNode* head){
     if (head == NULL)   return head;
     struct ListNode* node = head;
-    //å¯»æ‰¾é‡å¤èŠ‚ç‚¹çš„ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
+    //Ñ°ÕÒÖØ¸´½ÚµãµÄµÚÒ»¸ö½Úµã
     while (node->next != NULL){
         if (node->val == node->next->val)
             node->next = node->next->next;

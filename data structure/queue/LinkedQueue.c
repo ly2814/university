@@ -1,6 +1,6 @@
 //
 // Created by 34043 on 2023/8/18.
-// é“¾è¡¨å®ç°é˜Ÿåˆ—
+// Á´±íÊµÏÖ¶ÓÁĞ
 //
 
 #include <stdio.h>
@@ -29,58 +29,58 @@ _Bool init(LinkedQueue queue){
     return 1;
 }
 
-//å…¥é˜Ÿ
+//Èë¶Ó
 _Bool offerQueue(LinkedQueue queue, E element){
-    //åˆ›å»ºå¾…å…¥é˜ŸèŠ‚ç‚¹
+    //´´½¨´ıÈë¶Ó½Úµã
     Node node = malloc(sizeof (Node));
-    //åˆ¤æ–­æ˜¯å¦åˆ›å»ºæˆåŠŸ
+    //ÅĞ¶ÏÊÇ·ñ´´½¨³É¹¦
     if (node == NULL)   return 0;
-    //å°†å…ƒç´ æ”¾å…¥èŠ‚ç‚¹
+    //½«ÔªËØ·ÅÈë½Úµã
     node->element = element;
-    //å¾…å…¥é˜ŸèŠ‚ç‚¹ä¸ºé˜Ÿåˆ—æœ€åèŠ‚ç‚¹
+    //´ıÈë¶Ó½ÚµãÎª¶ÓÁĞ×îºó½Úµã
     node->next = NULL;
-    //å…¥é˜Ÿ
+    //Èë¶Ó
     queue->rare->next = node;
-    //ä¿®æ”¹é˜Ÿå°¾æŒ‡å‘
+    //ĞŞ¸Ä¶ÓÎ²Ö¸Ïò
     queue->rare = node;
     return 1;
 }
 
-//è¾“å‡ºé˜Ÿåˆ—
+//Êä³ö¶ÓÁĞ
 void printQueue(LinkedQueue queue){
     printf("<<<");
-    //è¿­ä»£é¡¹
+    //µü´úÏî
     Node node = queue->front->next;
     while (1){
         printf("%d ",node->element);
-        //æ‰“å°åˆ°æœ€åä¸€ä¸ªå…ƒç´ ,ç»ˆæ­¢å¾ªç¯
+        //´òÓ¡µ½×îºóÒ»¸öÔªËØ,ÖÕÖ¹Ñ­»·
         if (node == queue->rare)    break;
-        //è¿­ä»£
+        //µü´ú
         else    node = node->next;
     }
     printf("<<<\n");
 }
 
-//é˜Ÿåˆ—åˆ¤ç©º
+//¶ÓÁĞÅĞ¿Õ
 _Bool isEmpty(LinkedQueue queue){
     return queue->front == queue->rare;
 }
 
-//å‡ºé˜Ÿ
+//³ö¶Ó
 E pollQueue(LinkedQueue queue){
     if (isEmpty(queue)) return 0;
-    //å¾…å‡ºé˜ŸèŠ‚ç‚¹å…ƒç´ æå–
+    //´ı³ö¶Ó½ÚµãÔªËØÌáÈ¡
     E e = queue->front->next->element;
-    //å¾…å‡ºé˜ŸèŠ‚ç‚¹æå–
+    //´ı³ö¶Ó½ÚµãÌáÈ¡
     Node node = queue->front->next;
-    //è¢«åˆ é™¤èŠ‚ç‚¹ä¸æ˜¯æœ€åä¸€ä¸ªèŠ‚ç‚¹
-    //é˜Ÿåˆ—æ˜¯å…ˆè¿›å…ˆå‡º,æ‰€ä»¥åªä¿®æ”¹é˜Ÿé¦–çš„åç»§ç»“ç‚¹å³å¯
+    //±»É¾³ı½Úµã²»ÊÇ×îºóÒ»¸ö½Úµã
+    //¶ÓÁĞÊÇÏÈ½øÏÈ³ö,ËùÒÔÖ»ĞŞ¸Ä¶ÓÊ×µÄºó¼Ì½áµã¼´¿É
     queue->front->next = queue->front->next->next;
-    //è¢«åˆ é™¤èŠ‚ç‚¹æ˜¯æœ€åä¸€ä¸ªèŠ‚ç‚¹
+    //±»É¾³ı½ÚµãÊÇ×îºóÒ»¸ö½Úµã
     if (node == queue->rare) queue->rare = queue->front;
-    //é‡Šæ”¾ç©ºé—´
+    //ÊÍ·Å¿Õ¼ä
     free(node);
-    //è¿”å›å·²å‡ºé˜Ÿå…ƒç´ 
+    //·µ»ØÒÑ³ö¶ÓÔªËØ
     return e;
 }
 

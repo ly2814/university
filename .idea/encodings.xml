@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/data structure/test.c" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/data structure/tree/HuffmanTree.c" charset="GBK" />
-    <file url="PROJECT" charset="GBK" />
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="NO_ENCODING">
+    <file url="file://$PROJECT_DIR$/data structure/exam/linkedList/deleteDuplicates.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/exam/linkedList/reverseLinkedList.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/exam/linkedList/rotateRight.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/exam/stack/convertNumber.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/exam/stack/validParentheses.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/exam/tree/speciesOfTree.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/linearList/LinerList.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/linearList/LinkedList.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/linearList/SingleLinkedList.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/queue/ArrayQueue.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/queue/LinkedQueue.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/stack/ArrayStack.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/stack/LinkedStack.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data structure/tree/HuffmanTree.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data structure/tree/Tree.c" charset="GBK" />
   </component>
 </project>

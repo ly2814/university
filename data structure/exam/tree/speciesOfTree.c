@@ -3,28 +3,28 @@
 //
 #include <stdio.h>
 void dpFunction(int dp[], int size){
-    //0ä¸ªç»“ç‚¹æˆ–1ä¸ªç»“ç‚¹çš„æ•°çš„ç§ç±»å‡ä¸º1
+    //0¸ö½áµã»ò1¸ö½áµãµÄÊýµÄÖÖÀà¾ùÎª1
     dp[0]=dp[1]=1;
-    //ä»ŽäºŒå¼€å§‹
+    //´Ó¶þ¿ªÊ¼
     for (int i = 2; i <= size; ++i) {
-        //è®¾ç½®åˆå€¼0
+        //ÉèÖÃ³õÖµ0
         dp[i] = 0;
         for (int j = 0; j < i; ++j) {
-            //è®¡ç®—æ‰€æœ‰æƒ…å†µ,å¦‚ä¸‰ä¸ªç»“ç‚¹,å¯èƒ½æ˜¯ä¸‰ç§æƒ…å†µ
+            //¼ÆËãËùÓÐÇé¿ö,ÈçÈý¸ö½áµã,¿ÉÄÜÊÇÈýÖÖÇé¿ö
             dp[i] += dp[j] * dp[i-j-1];
         }
     }
 }
 int main(){
-    //ç»“ç‚¹æ•°é‡
+    //½áµãÊýÁ¿
     int size;
-    //å½•å…¥èŠ‚ç‚¹æ•°é‡
+    //Â¼Èë½ÚµãÊýÁ¿
     scanf("%d",&size);
-    //åˆå§‹åŒ–æ•°ç»„
+    //³õÊ¼»¯Êý×é
     int dp[size+1];
-    //è°ƒç”¨åŠ¨æ€è§„åˆ’å‡½æ•°
+    //µ÷ÓÃ¶¯Ì¬¹æ»®º¯Êý
     dpFunction(dp,size);
-    //è¾“å‡ºå¯èƒ½æ€§
+    //Êä³ö¿ÉÄÜÐÔ
     printf("%d",dp[size]);
     return 0;
 }

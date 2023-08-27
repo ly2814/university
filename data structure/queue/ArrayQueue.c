@@ -13,55 +13,55 @@ struct Queue{
     int front,rear;
 };
 
-//åˆå§‹åŒ–
+//³õÊ¼»¯
 _Bool initQueue(ArrayQueue queue){
-    //åˆ†é…å†…å­˜ç©ºé—´
+    //·ÖÅäÄÚ´æ¿Õ¼ä
     queue->array = malloc(sizeof (E) * 10);
-    //åˆ¤æ–­ç©ºé—´æ˜¯å¦åˆ†é…æˆåŠŸ
+    //ÅĞ¶Ï¿Õ¼äÊÇ·ñ·ÖÅä³É¹¦
     if (queue->array == NULL)   return  0;
-    //è®¾ç½®é˜Ÿåˆ—å®¹é‡
+    //ÉèÖÃ¶ÓÁĞÈİÁ¿
     queue->capacity = 10;
-    //ç©ºé˜Ÿåˆ—å¤´èŠ‚ç‚¹å°¾ç»“ç‚¹ç›¸åŒ
+    //¿Õ¶ÓÁĞÍ·½ÚµãÎ²½áµãÏàÍ¬
     queue->front = queue->rear = 0;
     return 1;
 }
 
-//å…¥é˜Ÿ
+//Èë¶Ó
 _Bool offerQueue(ArrayQueue queue, E element){
-    //è®¡ç®—å¾…æ’å…¥ä½ç½®
+    //¼ÆËã´ı²åÈëÎ»ÖÃ
     if ((queue->rear + 1) % queue->capacity == queue->front)
         return 0;
-    //æ›´æ–°ä½ç½®
+    //¸üĞÂÎ»ÖÃ
     queue->rear = (queue->rear + 1) % queue->capacity;
-    //å…¥é˜Ÿ
+    //Èë¶Ó
     queue->array[queue->rear] = element;
     return 1;
 }
 
-//éå†é˜Ÿåˆ—
+//±éÀú¶ÓÁĞ
 void printQueue(ArrayQueue queue){
     printf("<<<");
-    //ä»å¤´å…ƒç´ å¼€å§‹
+    //´ÓÍ·ÔªËØ¿ªÊ¼
     int i = queue->front;
     do {
-        //è®¡ç®—ä¸‹ä¸€ä¸ªå…ƒç´ ä½ç½®
+        //¼ÆËãÏÂÒ»¸öÔªËØÎ»ÖÃ
         i = (i + 1) % queue->capacity;
-        //è¾“å‡ºå…ƒç´ 
+        //Êä³öÔªËØ
         printf("%d ", queue->array[i]);
-    } while (i != queue->rear); //ç›´åˆ°i=å°¾å…ƒç´ ä½ç½®
+    } while (i != queue->rear); //Ö±µ½i=Î²ÔªËØÎ»ÖÃ
     printf("\n");
 }
 
-//é˜Ÿåˆ—åˆ¤ç©º
+//¶ÓÁĞÅĞ¿Õ
 _Bool isEmpty(ArrayQueue queue){
     return queue->front == queue->rear;
 }
 
-//å‡ºé˜Ÿ
+//³ö¶Ó
 E pollQueue(ArrayQueue queue){
-    //åç§»é˜Ÿé¦–æŒ‡é’ˆ
+    //ºóÒÆ¶ÓÊ×Ö¸Õë
     queue->front = (queue->front + 1) % queue->capacity;
-    //è¿”å›å…ƒç´ 
+    //·µ»ØÔªËØ
     return queue->array[queue->front];
 }
 
