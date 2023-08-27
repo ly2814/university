@@ -1,5 +1,6 @@
 //
 // Created by 34043 on 2023/8/27.
+// 哈夫曼树与哈夫曼编码
 //
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,8 +12,10 @@ typedef struct TreeNode{
     E element;
     struct TreeNode * left;
     struct TreeNode * right;
+    //权重
     int value;
 }   * Node;
+//创建节点
 Node createNode(E element, int value){
     Node node = malloc(sizeof (struct TreeNode));
     if (node == NULL)   return NULL;
@@ -21,6 +24,7 @@ Node createNode(E element, int value){
     node->left = node->right = NULL;
     return node;
 }
+//中序遍历
 void middle(Node root){
     if (root == NULL)   return;
     middle(root->left);
@@ -82,25 +86,39 @@ void printQueue(Queue queue){
     printf("\n");
 }
 
+//哈夫曼编码
 char * encode(Node root,E e){
+    //根结点为空直接返回NULL,编码为0
     if (root == NULL)   return NULL;
+    //根结点不为空返回空字符串
     if (root->element == e) return "";
+    //递归遍历左子树
     char * str = encode(root->left, e);
+    //开始回溯
     char * s = malloc(sizeof(char) * 10);
+    //记得初始化内存,三个参数分别为要初始化的内存空间指向,初始化值,空间大小
     memset(s,0,sizeof(char)*10);
+    //左子树遍历结束
     if (str != NULL){
+        //回溯数组中存储0
         s[0] = '0';
+        //拼接字符串,将s拼接到字符串str后面
         str = strcat(s, str);
     } else{
+        //遍历右子树
         str = encode(root->right, e);
+        //结点不为空
         if (str != NULL){
+            //编码为1
             s[0] = '1';
+            //拼接字符串
             str = strcat(s, str);
         }
     }
     return str;
 }
 
+//输出哈夫曼编码
 void printEncode(Node root, E e){
     printf("%c 的编码为: %s",e,encode(root,e));
     printf("\n");
@@ -115,16 +133,25 @@ int main(){
     offerQueue(&queue,createNode('C',8));
     offerQueue(&queue,createNode('D',13));
 
-    while (!isEmptyQueue(&queue)){
+    //构造哈夫曼树,直到队列中只剩下一个元素为止
+    while (queue.front->next != queue.rear){
+        //最小结点1
         Node left = pollQueue(&queue);
+        //最小结点2
         Node right = pollQueue(&queue);
+        //创建根结点:两个最小节点合并
         Node node = createNode(' ',left->value + right->value);
+        //连接左子树
         node->left = left;
+        //连接右子树
         node->right = right;
+        //把树入栈
         offerQueue(&queue, node);
     }
 
+    //将哈夫曼树出栈
     Node root = pollQueue(&queue);
+    //打印哈夫曼编码
     printEncode(root,'A');
     printEncode(root,'B');
     printEncode(root,'C');
